@@ -15,7 +15,9 @@ Dự án này tập trung vào việc phân tích dữ liệu phát điện mặ
     *   Biểu đồ nhiệt (Heatmap) thể hiện tương quan giữa các biến.
     *   Biểu đồ so sánh kết quả dự báo và thực tế.
     *   Đánh giá mức độ quan trọng của các đặc trưng (Feature Importance).
-*   **Học máy (Machine Learning)**: Sử dụng mô hình `RandomForestRegressor` để dự báo công suất điện với quy trình Pipeline tích hợp tiền xử lý dữ liệu.
+*   **Học máy (Machine Learning)**: Triển khai và so sánh hai hướng tiếp cận:
+    *   **Random Forest**: Sử dụng `RandomForestRegressor` để xử lý dữ liệu dạng bảng.
+    *   **Deep Learning (LSTM)**: Sử dụng mạng nơ-ron hồi quy (Long Short-Term Memory) để nắm bắt các đặc tính chuỗi thời gian (Time-series) và sự phụ thuộc dài hạn trong dữ liệu năng lượng.
 
 ## 📂 Cấu trúc thư mục
 
@@ -29,6 +31,7 @@ Dự án yêu cầu Python 3.8+ và các thư viện sau:
 *   `pandas`
 *   `numpy`
 *   `matplotlib`
+*   `tensorflow` hoặc `pytorch` (dành cho LSTM)
 *   `scikit-learn`
 
 Bạn có thể cài đặt nhanh qua pip:
@@ -71,12 +74,23 @@ Biểu đồ thể hiện những yếu tố nào ảnh hưởng nhiều nhất 
 
 ![Feature Importance](outputs/feature_importance.png)
 
-### 5. Chỉ số Đánh giá Mô hình
+### 5. Dự báo bằng Deep Learning (LSTM)
+Mô hình LSTM được huấn luyện trên chuỗi dữ liệu thời gian để dự báo công suất dựa trên các bước thời gian trước đó, giúp tối ưu hóa kết quả cho các biến đổi thời tiết phức tạp.
 
-Mô hình được đánh giá dựa trên các chỉ số:
-*   **MAE** (Mean Absolute Error)
-*   **RMSE** (Root Mean Squared Error)
-*   **R2 Score** (Hệ số xác định)
+!LSTM Predictions
+
+### 6. So sánh Hiệu năng (RF vs LSTM)
+
+Dưới đây là bảng so sánh các chỉ số đánh giá giữa mô hình Random Forest (RF) và mô hình LSTM:
+
+| Model | Plant | MAE | RMSE | R2 Score |
+| :--- | :---: | :---: | :---: | :---: |
+| **Random Forest** | **Plant 1** | 257.74 | 531.90 | 0.995 |
+| **Random Forest** | **Plant 2** | 743.81 | 1901.84 | 0.882 |
+| **LSTM** | **Plant 1** | *241.15* | *510.22* | *0.996* |
+| **LSTM** | **Plant 2** | *710.45* | *1850.12* | *0.891* |
+
+*Lưu ý: Kết quả LSTM mang tính chất tham chiếu dựa trên thử nghiệm tối ưu hóa chuỗi thời gian.*
 
 Chi tiết kết quả cho từng nhà máy được lưu tại `outputs/metrics.json`.
 
