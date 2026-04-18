@@ -45,7 +45,33 @@ pip install pandas numpy matplotlib scikit-learn
    ```
 3. Sau khi hoàn tất, kiểm tra thư mục `outputs/` để xem báo cáo `analysis_report.md` và các biểu đồ phân tích.
 
-## 📊 Kết quả mô hình
+## 📊 Kết quả Trực quan & Mô hình
+
+### 1. So sánh Sản lượng & Thời tiết giữa các Nhà máy
+Dưới đây là sự so sánh về tổng công suất AC và các chỉ số thời tiết (Bức xạ, Nhiệt độ) giữa Plant 1 và Plant 2.
+
+![Daily Generation](outputs/daily_generation_comparison.png)
+![Daily Weather](outputs/daily_weather_comparison.png)
+
+### 2. Tương quan đặc trưng (Heatmap)
+Mối liên hệ giữa các biến số như Bức xạ (Irradiation), Nhiệt độ Module và Công suất đầu ra.
+
+| Plant 1 | Plant 2 |
+| :---: | :---: |
+| ![Heatmap Plant 1](outputs/plant_1_correlation_heatmap.png) | ![Heatmap Plant 2](outputs/plant_2_correlation_heatmap.png) |
+
+### 3. Kết quả Dự báo (Predictions)
+So sánh giữa giá trị thực tế và giá trị dự báo từ mô hình Random Forest trên tập dữ liệu kiểm tra.
+
+![Predictions Plant 1](outputs/plant_1_predictions.png)
+![Predictions Plant 2](outputs/plant_2_predictions.png)
+
+### 4. Các đặc trưng quan trọng nhất
+Biểu đồ thể hiện những yếu tố nào ảnh hưởng nhiều nhất đến việc dự báo công suất điện.
+
+![Feature Importance](outputs/feature_importance.png)
+
+### 5. Chỉ số Đánh giá Mô hình
 
 Mô hình được đánh giá dựa trên các chỉ số:
 *   **MAE** (Mean Absolute Error)
